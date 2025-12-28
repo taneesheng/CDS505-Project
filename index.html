@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 40-Year Gap | WHO Life Expectancy Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========== CSS VARIABLES ========== */
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #e53e3e;
+            --accent-light: #fc8181;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --text-dark: #1a202c;
+            --text-medium: #4a5568;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --bg-cream: #fffaf0;
+            --white: #ffffff;
+            --gradient-hero: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
+            --gradient-accent: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            line-height: 1.2;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-md);
+            padding: 0.75rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            transition: color 0.3s;
+        }
+
+        .navbar.scrolled .nav-logo {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: var(--text-medium);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .navbar.scrolled .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--white);
+            z-index: 2;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h1 span {
+            color: var(--accent-light);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-number.red { color: var(--accent-light); }
+        .stat-number.green { color: #68d391; }
+        .stat-number.yellow { color: #faf089; }
+
+        .stat-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator i {
+            font-size: 2rem;
+            color: var(--white);
+            opacity: 0.7;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* ========== SECTION STYLES ========== */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-dark {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .section-cream {
+            background: var(--bg-cream);
+        }
+
+        .section-light {
+            background: var(--bg-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-number {
+            display: inline-block;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-dark .section-number {
+            color: var(--accent-light);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .section-dark .section-title {
+            color: var(--white);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-dark .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ========== INTRO SECTION ========== */
+        .intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .intro-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-text p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-box {
+            background: var(--gradient-accent);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box p {
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+
+        .intro-visual {
+            position: relative;
+        }
+
+        .comparison-cards {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .country-card {
+            flex: 1;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s;
+        }
+
+        .country-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .country-card.low {
+            border-top: 4px solid var(--accent);
+        }
+
+        .country-card.high {
+            border-top: 4px solid var(--success);
+        }
+
+        .country-flag {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .country-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .country-years {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .country-card.low .country-years { color: var(--accent); }
+        .country-card.high .country-years { color: var(--success); }
+
+        .country-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .gap-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .gap-arrow span {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .gap-arrow small {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+
+        /* ========== VISUALIZATION SECTIONS ========== */
+        .viz-section {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .viz-section.reverse {
+            grid-template-columns: 1.5fr 1fr;
+        }
+
+        .viz-section.reverse .viz-text {
+            order: 2;
+        }
+
+        .viz-text h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-dark .viz-text h3 {
+            color: var(--white);
+        }
+
+        .viz-text p {
+            font-size: 1.05rem;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-dark .viz-text p {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .insight-card {
+            background: rgba(56, 161, 105, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1.5rem;
+        }
+
+        .section-dark .insight-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: var(--accent-light);
+        }
+
+        .insight-card h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--success);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-dark .insight-card h4 {
+            color: var(--accent-light);
+        }
+
+        .insight-card p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .viz-container {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .section-dark .viz-container {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .viz-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        .viz-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ========== DASHBOARD SECTION ========== */
+        .dashboard-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, var(--bg-light) 0%, var(--white) 100%);
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .dashboard-wrapper {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            margin-top: 3rem;
+        }
+
+        .dashboard-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-header h3 {
+            font-size: 1.25rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .dashboard-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .dashboard-embed {
+            width: 100%;
+            height: 700px;
+            border: none;
+        }
+
+        /* ========== FINDINGS SECTION ========== */
+        .findings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .finding-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .finding-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .finding-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .finding-icon.blue { background: rgba(49, 130, 206, 0.1); color: #3182ce; }
+        .finding-icon.green { background: rgba(56, 161, 105, 0.1); color: var(--success); }
+        .finding-icon.red { background: rgba(229, 62, 62, 0.1); color: var(--accent); }
+        .finding-icon.yellow { background: rgba(214, 158, 46, 0.1); color: var(--warning); }
+
+        .finding-card h4 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .finding-card p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+        }
+
+        /* ========== CTA SECTION ========== */
+        .cta-section {
+            padding: 8rem 2rem;
+            background: var(--gradient-hero);
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--white);
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .footer-links h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.25rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* ========== ANIMATIONS ========== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 968px) {
+            .intro-content,
+            .viz-section,
+            .viz-section.reverse {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .viz-section.reverse .viz-text {
+                order: 0;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .comparison-cards {
+                flex-direction: column;
+            }
+
+            .gap-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">The 40-Year Gap</a>
+            <ul class="nav-links">
+                <li><a href="#intro">The Problem</a></li>
+                <li><a href="#wealth">Wealth Factor</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#health">Health</a></li>
+                <li><a href="#trends">Trends</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <span class="hero-badge">WHO Life Expectancy Analysis 2000-2015</span>
+            <h1>The <span>40-Year</span> Gap</h1>
+            <p class="hero-subtitle">
+                A child born in Japan can expect to live to 83. A child born in Lesotho? Only 46. 
+                That's a 37-year difference — nearly half a lifetime. What creates such dramatic inequality?
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number red">179</span>
+                    <span class="stat-label">Countries Analyzed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number green">16</span>
+                    <span class="stat-label">Years of Data</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number yellow">44.4</span>
+                    <span class="stat-label">Year Gap (Max-Min)</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="section" id="intro">
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-text fade-in">
+                    <span class="section-number">01 — The Problem</span>
+                    <h2>Life Expectancy: The Ultimate Measure of Progress</h2>
+                    <p>
+                        Life expectancy is perhaps the most fundamental indicator of a nation's development. 
+                        It reflects the cumulative impact of healthcare access, economic prosperity, education, 
+                        and social stability on human life.
+                    </p>
+                    <p>
+                        Yet in 2015, despite unprecedented global wealth and medical advances, a child's 
+                        expected lifespan still depends enormously on where they are born.
+                    </p>
+                    <div class="highlight-box">
+                        <h3>The Question We're Exploring</h3>
+                        <p>What factors determine how long we live? And can we identify pathways to close the gap?</p>
+                    </div>
+                </div>
+                <div class="intro-visual fade-in">
+                    <div class="comparison-cards">
+                        <div class="country-card low">
+                            <div class="country-flag">🇱🇸</div>
+                            <div class="country-name">Lesotho</div>
+                            <div class="country-years">46</div>
+                            <div class="country-label">Years Life Expectancy</div>
+                        </div>
+                        <div class="gap-arrow">
+                            <span>37</span>
+                            <small>Year Gap</small>
+                        </div>
+                        <div class="country-card high">
+                            <div class="country-flag">🇯🇵</div>
+                            <div class="country-name">Japan</div>
+                            <div class="country-years">83</div>
+                            <div class="country-label">Years Life Expectancy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Divide Section -->
+    <section class="section section-light" id="global">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-number">02 — The Global Divide</span>
+                <h2 class="section-title">Where You're Born Matters</h2>
+                <p class="section-subtitle">
+                    Life expectancy varies dramatically across the world. Africa averages just 57.8 years, 
+                    while North America and Europe exceed 77 years — a gap of nearly two decades.
+                </p>
+            </div>
+            <div class="viz-section">
+                <div class="viz-text slide-in-left">
+                    <h3>The Geography of Longevity</h3>
+                    <p>
+                        Our choropleth map reveals stark geographic patterns. The darkest red regions 
+                        — concentrated in Sub-Saharan Africa — represent countries where average 
+                        life expectancy remains below 55 years.
+                    </p>
+                    <p>
+                        In contrast, Japan, Switzerland, and Iceland lead the world with life 
+                        expectancies exceeding 81 years. These aren't just statistics — they 
+                        represent millions of years of human life.
+                    </p>
+                    <div class="insight-card">
+                        <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
+                        <p>The 20-year gap between Africa and North America represents an entire generation of lost life.</p>
+                    </div>
+                </div>
+                <div class="viz-container slide-in-right">
+                    <iframe src="https://public.tableau.com/views/CDS505_Group17_Project/Sheet1?:embed=y&:display_count=no&:showVizHome=no" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wealth Factor Section -->
+    <section class="section section-dark" id="wealth">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-number">03 — The Wealth Factor</span>
+                <h2 class="section-title">Does Money Buy Time?</h2>
+                <p class="section-subtitle">
+                    GDP per capita ranges from $148 to $112,418 — a staggering 759x difference. 
+                    But does wealth translate directly to longer life?
+                </p>
+            </div>
+            <div class="viz-section reverse">
+                <div class="viz-text slide-in-right">
+                    <h3>The Logarithmic Truth</h3>
+                    <p>
+                        Our scatter plot reveals a powerful but nuanced relationship. Yes, wealth 
+                        correlates with longevity — but with diminishing returns. The curve flattens 
+                        dramatically after $20,000 GDP per capita.
+                    </p>
+                    <p>
+                        This means that for the poorest nations, economic growth can add years to 
+                        citizens' lives. But for already-wealthy nations, simply increasing GDP 
+                        provides minimal benefit.
+                    </p>
+                    <div class="insight-card">
+                        <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
+                        <p>Wealth matters most when you have the least. Beyond ~$20,000 GDP per capita, 
+                        other factors become more important than additional wealth.</p>
+                    </div>
+                </div>
+                <div class="viz-container slide-in-left">
+                    <iframe src="https://public.tableau.com/views/CDS505_Group17_Project/Sheet4?:embed=y&:display_count=no&:showVizHome=no" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section" id="education">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-number">04 — The Education Effect</span>
+                <h2 class="section-title">Knowledge Extends Life</h2>
+                <p class="section-subtitle">
+                    Years of schooling shows one of the strongest correlations with life expectancy. 
+                    Education empowers better health decisions and economic opportunities.
+                </p>
+            </div>
+            <div class="viz-section">
+                <div class="viz-text slide-in-left">
+                    <h3>The Power of Learning</h3>
+                    <p>
+                        Unlike wealth, the relationship between education and life expectancy 
+                        remains remarkably linear. Each additional year of schooling correlates 
+                        with approximately 2 extra years of life.
+                    </p>
+                    <p>
+                        Countries with average schooling above 12 years consistently achieve 
+                        life expectancies above 75 years, regardless of their economic status. 
+                        Education appears to be a "great equalizer."
+                    </p>
+                    <div class="insight-card">
+                        <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
+                        <p>Education is the most modifiable factor for improving life expectancy. 
+                        Unlike GDP, it can be directly targeted through policy.</p>
+                    </div>
+                </div>
+                <div class="viz-container slide-in-right">
+                    <iframe src="https://public.tableau.com/views/CDS505_Group17_Project/Sheet5?:embed=y&:display_count=no&:showVizHome=no" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Section -->
+    <section class="section section-cream" id="health">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-number">05 — Health Infrastructure</span>
+                <h2 class="section-title">Healthcare Access Saves Lives</h2>
+                <p class="section-subtitle">
+                    Adult mortality rates and vaccination coverage reveal the direct impact 
+                    of healthcare infrastructure on population survival.
+                </p>
+            </div>
+            <div class="viz-section reverse">
+                <div class="viz-text slide-in-right">
+                    <h3>The Mortality-Longevity Connection</h3>
+                    <p>
+                        The scatter plot shows a strong inverse relationship: as adult mortality 
+                        increases, life expectancy plummets. Countries with mortality rates 
+                        above 400 per 1,000 rarely achieve life expectancies above 55 years.
+                    </p>
+                    <p>
+                        This underscores the importance of preventing premature adult deaths — 
+                        through disease prevention, accident reduction, and healthcare access.
+                    </p>
+                    <div class="insight-card">
+                        <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
+                        <p>Reducing adult mortality by 100 points (per 1,000) correlates with 
+                        approximately 5 additional years of life expectancy.</p>
+                    </div>
+                </div>
+                <div class="viz-container slide-in-left">
+                    <iframe src="https://public.tableau.com/views/CDS505_Group17_Project/Sheet7?:embed=y&:display_count=no&:showVizHome=no" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trends Section -->
+    <section class="section section-dark" id="trends">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-number">06 — Progress Over Time</span>
+                <h2 class="section-title">Is the World Getting Healthier?</h2>
+                <p class="section-subtitle">
+                    Tracking 16 years of data (2000-2015) reveals both progress and 
+                    persistent inequality in global health outcomes.
+                </p>
+            </div>
+            <div class="viz-section">
+                <div class="viz-text slide-in-left">
+                    <h3>Steady Global Improvement</h3>
+                    <p>
+                        The good news: global average life expectancy increased from approximately 
+                        67 years in 2000 to over 71 years in 2015. Every region showed improvement.
+                    </p>
+                    <p>
+                        However, the gap between regions remains stubbornly persistent. Africa's 
+                        trajectory improved faster than most regions, but it started so far behind 
+                        that the absolute gap remains enormous.
+                    </p>
+                    <div class="insight-card">
+                        <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
+                        <p>While all regions are improving, developing countries are gaining ground 
+                        slowly. At current rates, it would take decades to close the gap.</p>
+                    </div>
+                </div>
+                <div class="viz-container slide-in-right">
+                    <iframe src="https://public.tableau.com/views/CDS505_Group17_Project/Sheet10?:embed=y&:display_count=no&:showVizHome=no" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard-section" id="dashboard">
+        <div class="dashboard-container">
+            <div class="section-header fade-in">
+                <span class="section-number">07 — Interactive Exploration</span>
+                <h2 class="section-title">Explore the Data Yourself</h2>
+                <p class="section-subtitle">
+                    Our interactive dashboard allows you to filter by region, compare countries, 
+                    and discover patterns in global health data.
+                </p>
+            </div>
+            <div class="dashboard-wrapper fade-in">
+                <div class="dashboard-header">
+                    <h3><i class="fas fa-chart-line"></i> Global Life Expectancy Dashboard</h3>
+                    <div class="dashboard-controls">
+                        <a href="https://public.tableau.com/app/profile/tan.ee.sheng/viz/CDS505_Group17_Project/Dashboard1" 
+                           target="_blank" class="control-btn">
+                            <i class="fas fa-external-link-alt"></i> Open Full Screen
+                        </a>
+                    </div>
+                </div>
+                <iframe class="dashboard-embed" 
+                        src="https://public.tableau.com/views/CDS505_Group17_Project/Dashboard1?:embed=y&:display_count=no&:showVizHome=no">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Findings Section -->
+    <section class="section" id="findings">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-number">08 — Key Findings</span>
+                <h2 class="section-title">What the Data Reveals</h2>
+                <p class="section-subtitle">
+                    Our analysis of 179 countries over 16 years reveals clear pathways to improving 
+                    human longevity across the globe.
+                </p>
+            </div>
+            <div class="findings-grid">
+                <div class="finding-card fade-in">
+                    <div class="finding-icon blue">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4>Education is Key</h4>
+                    <p>Each additional year of schooling correlates with ~2 years of added life expectancy. 
+                    Education is the most modifiable factor for policy intervention.</p>
+                </div>
+                <div class="finding-card fade-in">
+                    <div class="finding-icon green">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h4>Wealth Has Limits</h4>
+                    <p>GDP matters most for poor nations. Beyond $20,000 per capita, additional wealth 
+                    provides diminishing returns for life expectancy.</p>
+                </div>
+                <div class="finding-card fade-in">
+                    <div class="finding-icon red">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h4>Healthcare Saves Lives</h4>
+                    <p>Vaccination coverage and reduced adult mortality directly correlate with longevity. 
+                    Basic healthcare access can add years to life.</p>
+                </div>
+                <div class="finding-card fade-in">
+                    <div class="finding-icon yellow">
+                        <i class="fas fa-globe-africa"></i>
+                    </div>
+                    <h4>Geography Still Matters</h4>
+                    <p>Despite progress, the 20-year gap between Africa and developed regions persists. 
+                    Targeted intervention in high-mortality regions is essential.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section" id="action">
+        <div class="cta-content">
+            <h2>The Path Forward</h2>
+            <p>
+                The data reveals a clear path: investing in education, expanding healthcare access, 
+                and supporting economic development in the poorest nations can add decades to human life. 
+                The question isn't whether we <em>can</em> close the 40-year gap — it's whether we <em>will</em>.
+            </p>
+            <div class="cta-buttons">
+                <a href="https://public.tableau.com/app/profile/tan.ee.sheng/viz/CDS505_Group17_Project/Dashboard1" 
+                   target="_blank" class="btn btn-primary">
+                    <i class="fas fa-chart-bar"></i> Explore Full Dashboard
+                </a>
+                <a href="https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated" 
+                   target="_blank" class="btn btn-secondary">
+                    <i class="fas fa-database"></i> View Dataset
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>The 40-Year Gap</h3>
+                <p>
+                    A data visualization project exploring global life expectancy patterns 
+                    and the factors that determine how long we live. Created for CDS505 
+                    Data Visualization & Visual Analytics.
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#intro">The Problem</a></li>
+                    <li><a href="#wealth">Wealth Factor</a></li>
+                    <li><a href="#education">Education Effect</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated" target="_blank">Dataset (Kaggle)</a></li>
+                    <li><a href="https://public.tableau.com/app/profile/tan.ee.sheng/viz/CDS505_Group17_Project/Dashboard1" target="_blank">Tableau Public</a></li>
+                    <li><a href="https://www.who.int/" target="_blank">World Health Organization</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CDS505 Group 17 | Universiti Sains Malaysia</p>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation for stats
+        const animateCounter = (element, target, duration = 2000) => {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        };
+
+        // Animate stats when hero is visible
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.stat-number').forEach(stat => {
+                        const value = parseFloat(stat.textContent);
+                        if (!isNaN(value)) {
+                            stat.textContent = '0';
+                            animateCounter(stat, value);
+                        }
+                    });
+                    heroObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        heroObserver.observe(document.querySelector('.hero'));
+    </script>
+</body>
+</html>
