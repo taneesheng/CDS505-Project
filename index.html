@@ -23,6 +23,7 @@
             --white: #ffffff;
             --gradient-hero: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
             --gradient-accent: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+            --gradient-success: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
             --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
             --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
@@ -588,8 +589,45 @@
 
         .dashboard-embed {
             width: 100%;
-            height: 700px;
+            height: 800px;
             border: none;
+        }
+
+        /* ========== TASK TABS ========== */
+        .task-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .task-tab {
+            padding: 1rem 2rem;
+            background: var(--white);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .task-tab:hover, .task-tab.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .task-tab i {
+            margin-right: 0.5rem;
+        }
+
+        .task-content {
+            display: none;
+        }
+
+        .task-content.active {
+            display: block;
         }
 
         /* ========== FINDINGS SECTION ========== */
@@ -639,6 +677,59 @@
         .finding-card p {
             color: var(--text-medium);
             font-size: 0.95rem;
+        }
+
+        /* ========== TOP IMPROVERS SECTION ========== */
+        .improvers-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .improver-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+        }
+
+        .improver-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .improver-rank {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-success);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .improver-country {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .improver-gain {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .improver-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
         }
 
         /* ========== CTA SECTION ========== */
@@ -882,6 +973,10 @@
             .gap-arrow {
                 transform: rotate(90deg);
             }
+
+            .improvers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 600px) {
@@ -896,6 +991,18 @@
             .section {
                 padding: 4rem 1.5rem;
             }
+
+            .improvers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .task-tabs {
+                flex-direction: column;
+            }
+
+            .task-tab {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -906,36 +1013,37 @@
             <a href="#" class="nav-logo">The 40-Year Gap</a>
             <ul class="nav-links">
                 <li><a href="#intro">The Problem</a></li>
-                <li><a href="#wealth">Wealth Factor</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#health">Health</a></li>
-                <li><a href="#trends">Trends</a></li>
+                <li><a href="#global">Global Divide</a></li>
+                <li><a href="#socioeconomic">Socioeconomics</a></li>
+                <li><a href="#health">Health Indicators</a></li>
+                <li><a href="#improvement">Improvement</a></li>
                 <li><a href="#dashboard">Dashboard</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero">
+    <section class="hero">
         <div class="hero-content">
             <span class="hero-badge">WHO Life Expectancy Analysis 2000-2015</span>
             <h1>The <span>40-Year</span> Gap</h1>
             <p class="hero-subtitle">
-                A child born in Japan can expect to live to 83. A child born in Lesotho? Only 46. 
-                That's a 37-year difference — nearly half a lifetime. What creates such dramatic inequality?
+                What determines how long we live? Our analysis of 179 countries reveals 
+                the stark reality: where you're born can mean the difference between 
+                a life of 46 years or 83 years.
             </p>
             <div class="hero-stats">
                 <div class="stat-item">
-                    <span class="stat-number red">179</span>
-                    <span class="stat-label">Countries Analyzed</span>
+                    <span class="stat-number red">46</span>
+                    <span class="stat-label">Lesotho (Lowest)</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number green">16</span>
-                    <span class="stat-label">Years of Data</span>
+                    <span class="stat-number yellow">71.46</span>
+                    <span class="stat-label">Global Average</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number yellow">44.4</span>
-                    <span class="stat-label">Year Gap (Max-Min)</span>
+                    <span class="stat-number green">83.8</span>
+                    <span class="stat-label">Japan (Highest)</span>
                 </div>
             </div>
         </div>
@@ -949,23 +1057,24 @@
         <div class="container">
             <div class="intro-content">
                 <div class="intro-text fade-in">
-                    <span class="section-number">01 — The Problem</span>
-                    <h2>Life Expectancy: The Ultimate Measure of Progress</h2>
+                    <h2>A Tale of Two Lives</h2>
                     <p>
-                        Life expectancy is perhaps the most fundamental indicator of a nation's development. 
-                        It reflects the cumulative impact of healthcare access, economic prosperity, education, 
-                        and social stability on human life.
+                        Born in Japan, you can expect to live until 83. Born in Lesotho, 
+                        your life expectancy is just 46 years. This isn't about individual 
+                        choices — it's about systemic factors that determine human survival.
                     </p>
                     <p>
-                        Yet in 2015, despite unprecedented global wealth and medical advances, a child's 
-                        expected lifespan still depends enormously on where they are born.
+                        Our analysis of WHO data from 179 countries (2000-2015) reveals 
+                        the key determinants: GDP, education, healthcare access, and 
+                        vaccination coverage all play critical roles.
                     </p>
                     <div class="highlight-box">
-                        <h3>The Question We're Exploring</h3>
-                        <p>What factors determine how long we live? And can we identify pathways to close the gap?</p>
+                        <h3>The Central Question</h3>
+                        <p>What separates a 46-year life from an 83-year life? 
+                        And more importantly — what can be done about it?</p>
                     </div>
                 </div>
-                <div class="intro-visual fade-in">
+                <div class="intro-visual slide-in-right">
                     <div class="comparison-cards">
                         <div class="country-card low">
                             <div class="country-flag">🇱🇸</div>
@@ -974,13 +1083,13 @@
                             <div class="country-label">Years Life Expectancy</div>
                         </div>
                         <div class="gap-arrow">
-                            <span>37</span>
+                            <span>37+</span>
                             <small>Year Gap</small>
                         </div>
                         <div class="country-card high">
                             <div class="country-flag">🇯🇵</div>
                             <div class="country-name">Japan</div>
-                            <div class="country-years">83</div>
+                            <div class="country-years">83.8</div>
                             <div class="country-label">Years Life Expectancy</div>
                         </div>
                     </div>
@@ -989,141 +1098,105 @@
         </div>
     </section>
 
-    <!-- Global Divide Section -->
+    <!-- Task 1: Global Health Inequality -->
     <section class="section section-light" id="global">
         <div class="container">
             <div class="section-header fade-in">
-                <span class="section-number">02 — The Global Divide</span>
+                <span class="section-number">01 — Global Health Inequality</span>
                 <h2 class="section-title">Where You're Born Matters</h2>
                 <p class="section-subtitle">
-                    Life expectancy varies dramatically across the world. Africa averages just 57.8 years, 
-                    while North America and Europe exceed 77 years — a gap of nearly two decades.
+                    Life expectancy varies dramatically across the world. Africa averages 62.47 years, 
+                    while Europe exceeds 79 years — a gap of nearly two decades.
                 </p>
             </div>
             <div class="viz-section">
                 <div class="viz-text slide-in-left">
                     <h3>The Geography of Longevity</h3>
                     <p>
-                        Our choropleth map reveals stark geographic patterns. The darkest red regions 
+                        Our choropleth map reveals stark geographic patterns. The darkest regions 
                         — concentrated in Sub-Saharan Africa — represent countries where average 
                         life expectancy remains below 55 years.
                     </p>
                     <p>
                         In contrast, Japan, Switzerland, and Iceland lead the world with life 
-                        expectancies exceeding 81 years. These aren't just statistics — they 
-                        represent millions of years of human life.
+                        expectancies exceeding 82 years. The box plot shows Africa has both 
+                        the lowest median AND highest variance in outcomes.
                     </p>
                     <div class="insight-card">
                         <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
-                        <p>The 20-year gap between Africa and North America represents an entire generation of lost life.</p>
+                        <p>Developed nations average 78.51 years vs 66.34 years for developing nations — 
+                        a 12-year gap determined largely by birth location.</p>
                     </div>
                 </div>
                 <div class="viz-container slide-in-right">
-                    <iframe src="https://public.tableau.com/views/CDS505_Group17_Project/Sheet1?:embed=y&:display_count=no&:showVizHome=no" 
+                    <iframe src="https://public.tableau.com/views/505project_t1/Task1?:embed=y&:display_count=no&:showVizHome=no" 
                             allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Wealth Factor Section -->
-    <section class="section section-dark" id="wealth">
+    <!-- Task 2: Socioeconomic Factors -->
+    <section class="section section-dark" id="socioeconomic">
         <div class="container">
             <div class="section-header fade-in">
-                <span class="section-number">03 — The Wealth Factor</span>
+                <span class="section-number">02 — Socioeconomic Factors</span>
                 <h2 class="section-title">Does Money Buy Time?</h2>
                 <p class="section-subtitle">
-                    GDP per capita ranges from $148 to $112,418 — a staggering 759x difference. 
-                    But does wealth translate directly to longer life?
+                    GDP per capita and education levels show strong correlations with life expectancy, 
+                    but the relationship is more nuanced than simple wealth accumulation.
                 </p>
             </div>
             <div class="viz-section reverse">
                 <div class="viz-text slide-in-right">
-                    <h3>The Logarithmic Truth</h3>
+                    <h3>The Preston Curve</h3>
                     <p>
-                        Our scatter plot reveals a powerful but nuanced relationship. Yes, wealth 
+                        Our scatter plot reveals the famous Preston Curve relationship. Yes, wealth 
                         correlates with longevity — but with diminishing returns. The curve flattens 
                         dramatically after $20,000 GDP per capita.
                     </p>
                     <p>
-                        This means that for the poorest nations, economic growth can add years to 
-                        citizens' lives. But for already-wealthy nations, simply increasing GDP 
-                        provides minimal benefit.
+                        Education shows an even stronger effect: Developed nations average 12.1 years 
+                        of schooling versus 7.4 years for developing nations. Each additional year 
+                        of education correlates with approximately 2 years of added life expectancy.
                     </p>
                     <div class="insight-card">
                         <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
-                        <p>Wealth matters most when you have the least. Beyond ~$20,000 GDP per capita, 
-                        other factors become more important than additional wealth.</p>
+                        <p>Education is the most modifiable factor. Unlike GDP, schooling years can be 
+                        directly targeted through policy intervention.</p>
                     </div>
                 </div>
                 <div class="viz-container slide-in-left">
-                    <iframe src="https://public.tableau.com/views/CDS505_Group17_Project/Sheet4?:embed=y&:display_count=no&:showVizHome=no" 
+                    <iframe src="https://public.tableau.com/views/505project_t2/T2-Socioeconomics?:embed=y&:display_count=no&:showVizHome=no" 
                             allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Education Section -->
-    <section class="section" id="education">
+    <!-- Task 3: Health Indicators -->
+    <section class="section section-cream" id="health">
         <div class="container">
             <div class="section-header fade-in">
-                <span class="section-number">04 — The Education Effect</span>
-                <h2 class="section-title">Knowledge Extends Life</h2>
+                <span class="section-number">03 — Health Indicators</span>
+                <h2 class="section-title">Healthcare Saves Lives</h2>
                 <p class="section-subtitle">
-                    Years of schooling shows one of the strongest correlations with life expectancy. 
-                    Education empowers better health decisions and economic opportunities.
+                    Mortality rates, vaccination coverage, and nutritional status directly impact 
+                    how long populations survive. These are the proximal causes of longevity differences.
                 </p>
             </div>
             <div class="viz-section">
                 <div class="viz-text slide-in-left">
-                    <h3>The Power of Learning</h3>
+                    <h3>Mortality & Vaccination Impact</h3>
                     <p>
-                        Unlike wealth, the relationship between education and life expectancy 
-                        remains remarkably linear. Each additional year of schooling correlates 
-                        with approximately 2 extra years of life.
+                        Adult mortality (deaths per 1000 aged 15-60) shows a strong inverse relationship 
+                        with life expectancy. The global average adult mortality is 163.7 per 1000, 
+                        while infant mortality averages 23.56 per 1000.
                     </p>
                     <p>
-                        Countries with average schooling above 12 years consistently achieve 
-                        life expectancies above 75 years, regardless of their economic status. 
-                        Education appears to be a "great equalizer."
-                    </p>
-                    <div class="insight-card">
-                        <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
-                        <p>Education is the most modifiable factor for improving life expectancy. 
-                        Unlike GDP, it can be directly targeted through policy.</p>
-                    </div>
-                </div>
-                <div class="viz-container slide-in-right">
-                    <iframe src="https://public.tableau.com/views/CDS505_Group17_Project/Sheet5?:embed=y&:display_count=no&:showVizHome=no" 
-                            allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Health Section -->
-    <section class="section section-cream" id="health">
-        <div class="container">
-            <div class="section-header fade-in">
-                <span class="section-number">05 — Health Infrastructure</span>
-                <h2 class="section-title">Healthcare Access Saves Lives</h2>
-                <p class="section-subtitle">
-                    Adult mortality rates and vaccination coverage reveal the direct impact 
-                    of healthcare infrastructure on population survival.
-                </p>
-            </div>
-            <div class="viz-section reverse">
-                <div class="viz-text slide-in-right">
-                    <h3>The Mortality-Longevity Connection</h3>
-                    <p>
-                        The scatter plot shows a strong inverse relationship: as adult mortality 
-                        increases, life expectancy plummets. Countries with mortality rates 
-                        above 400 per 1,000 rarely achieve life expectancies above 55 years.
-                    </p>
-                    <p>
-                        This underscores the importance of preventing premature adult deaths — 
-                        through disease prevention, accident reduction, and healthcare access.
+                        Vaccination coverage tells a success story: Polio (88.3%), Diphtheria (87.9%), 
+                        Hepatitis B (87.1%), and Measles (80.2%) coverage have all improved significantly, 
+                        contributing to reduced child mortality globally.
                     </p>
                     <div class="insight-card">
                         <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
@@ -1131,74 +1204,110 @@
                         approximately 5 additional years of life expectancy.</p>
                     </div>
                 </div>
-                <div class="viz-container slide-in-left">
-                    <iframe src="https://public.tableau.com/views/CDS505_Group17_Project/Sheet7?:embed=y&:display_count=no&:showVizHome=no" 
+                <div class="viz-container slide-in-right">
+                    <iframe src="https://public.tableau.com/views/505project_t3/T3-Mortality?:embed=y&:display_count=no&:showVizHome=no" 
                             allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Trends Section -->
-    <section class="section section-dark" id="trends">
+    <!-- Task 4: Life Expectancy Improvement -->
+    <section class="section section-dark" id="improvement">
         <div class="container">
             <div class="section-header fade-in">
-                <span class="section-number">06 — Progress Over Time</span>
-                <h2 class="section-title">Is the World Getting Healthier?</h2>
+                <span class="section-number">04 — Life Expectancy Improvement</span>
+                <h2 class="section-title">Success Stories: Who Improved Most?</h2>
                 <p class="section-subtitle">
-                    Tracking 16 years of data (2000-2015) reveals both progress and 
-                    persistent inequality in global health outcomes.
+                    Between 2000 and 2015, some countries achieved remarkable gains in life expectancy. 
+                    Understanding their success can guide future interventions.
                 </p>
             </div>
-            <div class="viz-section">
+            
+            <!-- Top Improvers Cards -->
+            <div class="improvers-grid fade-in">
+                <div class="improver-card">
+                    <div class="improver-rank">1</div>
+                    <div class="improver-country">🇷🇼 Rwanda</div>
+                    <div class="improver-gain">+18.9</div>
+                    <div class="improver-label">Years Gained</div>
+                </div>
+                <div class="improver-card">
+                    <div class="improver-rank">2</div>
+                    <div class="improver-country">🇿🇲 Zambia</div>
+                    <div class="improver-gain">+17.3</div>
+                    <div class="improver-label">Years Gained</div>
+                </div>
+                <div class="improver-card">
+                    <div class="improver-rank">3</div>
+                    <div class="improver-country">🇿🇼 Zimbabwe</div>
+                    <div class="improver-gain">+17.1</div>
+                    <div class="improver-label">Years Gained</div>
+                </div>
+                <div class="improver-card">
+                    <div class="improver-rank">4</div>
+                    <div class="improver-country">🇺🇬 Uganda</div>
+                    <div class="improver-gain">+16.7</div>
+                    <div class="improver-label">Years Gained</div>
+                </div>
+                <div class="improver-card">
+                    <div class="improver-rank">5</div>
+                    <div class="improver-country">🇹🇿 Tanzania</div>
+                    <div class="improver-gain">+16.4</div>
+                    <div class="improver-label">Years Gained</div>
+                </div>
+            </div>
+
+            <div class="viz-section" style="margin-top: 3rem;">
                 <div class="viz-text slide-in-left">
-                    <h3>Steady Global Improvement</h3>
+                    <h3>All Top 15 Improvers Are African</h3>
                     <p>
-                        The good news: global average life expectancy increased from approximately 
-                        67 years in 2000 to over 71 years in 2015. Every region showed improvement.
+                        A remarkable finding: every single country in the top 15 life expectancy 
+                        improvers is from Africa. This "catch-up" phenomenon shows that targeted 
+                        interventions can dramatically improve health outcomes.
                     </p>
                     <p>
-                        However, the gap between regions remains stubbornly persistent. Africa's 
-                        trajectory improved faster than most regions, but it started so far behind 
-                        that the absolute gap remains enormous.
+                        The key factors driving improvement were: GDP growth (+350 USD average), 
+                        adult mortality reduction (-200 per 1000), and expanded vaccination 
+                        coverage (+30 percentage points for Polio).
                     </p>
                     <div class="insight-card">
                         <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
-                        <p>While all regions are improving, developing countries are gaining ground 
-                        slowly. At current rates, it would take decades to close the gap.</p>
+                        <p>Rwanda gained nearly 19 years of life expectancy in just 15 years — 
+                        proving that rapid improvement is possible with focused investment.</p>
                     </div>
                 </div>
                 <div class="viz-container slide-in-right">
-                    <iframe src="https://public.tableau.com/views/CDS505_Group17_Project/Sheet10?:embed=y&:display_count=no&:showVizHome=no" 
+                    <iframe src="https://public.tableau.com/views/505project_t4/Task4?:embed=y&:display_count=no&:showVizHome=no" 
                             allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Dashboard Section -->
+    <!-- Interactive Dashboard Section -->
     <section class="dashboard-section" id="dashboard">
         <div class="dashboard-container">
             <div class="section-header fade-in">
-                <span class="section-number">07 — Interactive Exploration</span>
+                <span class="section-number">05 — Interactive Exploration</span>
                 <h2 class="section-title">Explore the Data Yourself</h2>
                 <p class="section-subtitle">
-                    Our interactive dashboard allows you to filter by region, compare countries, 
-                    and discover patterns in global health data.
+                    Our interactive mini-dashboard combines key visualizations. Filter by region, 
+                    compare countries, and discover patterns in global health data.
                 </p>
             </div>
             <div class="dashboard-wrapper fade-in">
                 <div class="dashboard-header">
-                    <h3><i class="fas fa-chart-line"></i> Global Life Expectancy Dashboard</h3>
+                    <h3><i class="fas fa-chart-line"></i> Global Life Expectancy Mini-Dashboard</h3>
                     <div class="dashboard-controls">
-                        <a href="https://public.tableau.com/app/profile/tan.ee.sheng/viz/CDS505_Group17_Project/Dashboard1" 
+                        <a href="https://public.tableau.com/app/profile/runze.gao/viz/505project_Miniboard/Miniboard" 
                            target="_blank" class="control-btn">
                             <i class="fas fa-external-link-alt"></i> Open Full Screen
                         </a>
                     </div>
                 </div>
                 <iframe class="dashboard-embed" 
-                        src="https://public.tableau.com/views/CDS505_Group17_Project/Dashboard1?:embed=y&:display_count=no&:showVizHome=no">
+                        src="https://public.tableau.com/views/505project_Miniboard/Miniboard?:embed=y&:display_count=no&:showVizHome=no">
                 </iframe>
             </div>
         </div>
@@ -1208,7 +1317,7 @@
     <section class="section" id="findings">
         <div class="container">
             <div class="section-header fade-in">
-                <span class="section-number">08 — Key Findings</span>
+                <span class="section-number">06 — Key Findings</span>
                 <h2 class="section-title">What the Data Reveals</h2>
                 <p class="section-subtitle">
                     Our analysis of 179 countries over 16 years reveals clear pathways to improving 
@@ -1222,7 +1331,8 @@
                     </div>
                     <h4>Education is Key</h4>
                     <p>Each additional year of schooling correlates with ~2 years of added life expectancy. 
-                    Education is the most modifiable factor for policy intervention.</p>
+                    The 4.7-year education gap (12.1 vs 7.4 years) between developed and developing nations 
+                    is a primary driver of health inequality.</p>
                 </div>
                 <div class="finding-card fade-in">
                     <div class="finding-icon green">
@@ -1230,23 +1340,23 @@
                     </div>
                     <h4>Wealth Has Limits</h4>
                     <p>GDP matters most for poor nations. Beyond $20,000 per capita, additional wealth 
-                    provides diminishing returns for life expectancy.</p>
+                    provides diminishing returns for life expectancy — the Preston Curve in action.</p>
                 </div>
                 <div class="finding-card fade-in">
                     <div class="finding-icon red">
                         <i class="fas fa-heartbeat"></i>
                     </div>
-                    <h4>Healthcare Saves Lives</h4>
-                    <p>Vaccination coverage and reduced adult mortality directly correlate with longevity. 
-                    Basic healthcare access can add years to life.</p>
+                    <h4>Mortality Reduction Works</h4>
+                    <p>Countries that reduced adult mortality by 200+ points per 1000 gained the most 
+                    life years. Basic healthcare access and disease prevention are transformative.</p>
                 </div>
                 <div class="finding-card fade-in">
                     <div class="finding-icon yellow">
                         <i class="fas fa-globe-africa"></i>
                     </div>
-                    <h4>Geography Still Matters</h4>
-                    <p>Despite progress, the 20-year gap between Africa and developed regions persists. 
-                    Targeted intervention in high-mortality regions is essential.</p>
+                    <h4>Africa is Catching Up</h4>
+                    <p>All top 15 improvers are African nations. Rwanda's 18.9-year gain proves that 
+                    rapid improvement is possible with focused investment in health infrastructure.</p>
                 </div>
             </div>
         </div>
@@ -1262,7 +1372,7 @@
                 The question isn't whether we <em>can</em> close the 40-year gap — it's whether we <em>will</em>.
             </p>
             <div class="cta-buttons">
-                <a href="https://public.tableau.com/app/profile/tan.ee.sheng/viz/CDS505_Group17_Project/Dashboard1" 
+                <a href="https://public.tableau.com/app/profile/runze.gao/viz/505project_Miniboard/Miniboard" 
                    target="_blank" class="btn btn-primary">
                     <i class="fas fa-chart-bar"></i> Explore Full Dashboard
                 </a>
@@ -1282,23 +1392,23 @@
                 <p>
                     A data visualization project exploring global life expectancy patterns 
                     and the factors that determine how long we live. Created for CDS505 
-                    Data Visualization & Visual Analytics.
+                    Data Visualization & Visual Analytics, Universiti Sains Malaysia.
                 </p>
             </div>
             <div class="footer-links">
-                <h4>Quick Links</h4>
+                <h4>Explore</h4>
                 <ul>
-                    <li><a href="#intro">The Problem</a></li>
-                    <li><a href="#wealth">Wealth Factor</a></li>
-                    <li><a href="#education">Education Effect</a></li>
-                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#global">Global Inequality</a></li>
+                    <li><a href="#socioeconomic">Socioeconomics</a></li>
+                    <li><a href="#health">Health Indicators</a></li>
+                    <li><a href="#improvement">Improvement</a></li>
                 </ul>
             </div>
             <div class="footer-links">
                 <h4>Resources</h4>
                 <ul>
                     <li><a href="https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated" target="_blank">Dataset (Kaggle)</a></li>
-                    <li><a href="https://public.tableau.com/app/profile/tan.ee.sheng/viz/CDS505_Group17_Project/Dashboard1" target="_blank">Tableau Public</a></li>
+                    <li><a href="https://public.tableau.com/app/profile/runze.gao" target="_blank">Tableau Public</a></li>
                     <li><a href="https://www.who.int/" target="_blank">World Health Organization</a></li>
                 </ul>
             </div>
@@ -1306,7 +1416,7 @@
         <div class="footer-bottom">
             <p>&copy; 2025 CDS505 Group 17 | Universiti Sains Malaysia</p>
             <div class="footer-social">
-                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>
                 <a href="#"><i class="fas fa-envelope"></i></a>
             </div>
