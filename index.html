@@ -21,7 +21,7 @@
             --bg-light: #f7fafc;
             --bg-cream: #fffaf0;
             --white: #ffffff;
-            --gradient-hero: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
+            --gradient-hero: linear-gradient(135deg, rgba(26, 54, 93, 0.9) 0%, rgba(44, 82, 130, 0.85) 50%, rgba(49, 130, 206, 0.8) 100%);
             --gradient-accent: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
             --gradient-success: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
@@ -146,31 +146,160 @@
         /* ========== HERO SECTION ========== */
         .hero {
             min-height: 100vh;
-            background: var(--gradient-hero);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            background: #1a365d;
         }
 
-        .hero::before {
-            content: '';
+        /* Video/Image Background */
+        .hero-background {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+
+        /* Animated gradient overlay */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-hero);
+            z-index: 1;
+        }
+
+        /* Floating particles animation */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 20s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 25s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 18s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 22s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 19s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 21s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 2.5s; animation-duration: 17s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 1.5s; animation-duration: 23s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 4.5s; animation-duration: 20s; }
+        .particle:nth-child(10) { left: 15%; animation-delay: 3.5s; animation-duration: 24s; }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* DNA Helix Animation */
+        .dna-helix {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 400px;
+            z-index: 2;
+            opacity: 0.3;
+        }
+
+        .dna-strand {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .dna-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: dnaRotate 4s ease-in-out infinite;
+        }
+
+        @keyframes dnaRotate {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(80px); }
+        }
+
+        /* Pulse rings */
+        .pulse-rings {
+            position: absolute;
+            left: 10%;
+            top: 30%;
+            z-index: 2;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: pulseRing 3s ease-out infinite;
+        }
+
+        .pulse-ring:nth-child(2) { animation-delay: 1s; }
+        .pulse-ring:nth-child(3) { animation-delay: 2s; }
+
+        @keyframes pulseRing {
+            0% {
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
         }
 
         .hero-content {
             text-align: center;
             color: var(--white);
-            z-index: 2;
+            z-index: 10;
             padding: 2rem;
             max-width: 900px;
+            position: relative;
         }
 
         .hero-badge {
@@ -185,6 +314,7 @@
             text-transform: uppercase;
             margin-bottom: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInDown 1s ease-out;
         }
 
         .hero h1 {
@@ -192,10 +322,23 @@
             font-weight: 700;
             margin-bottom: 1.5rem;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out 0.3s both;
         }
 
         .hero h1 span {
             color: var(--accent-light);
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(229, 62, 62, 0.3);
+            z-index: -1;
         }
 
         .hero-subtitle {
@@ -205,6 +348,7 @@
             max-width: 700px;
             margin: 0 auto 3rem;
             line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.5s both;
         }
 
         .hero-stats {
@@ -213,10 +357,23 @@
             gap: 3rem;
             flex-wrap: wrap;
             margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.7s both;
         }
 
         .stat-item {
             text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 140px;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .stat-number {
@@ -239,29 +396,58 @@
             margin-top: 0.5rem;
         }
 
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .scroll-indicator {
             position: absolute;
             bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
-            animation: bounce 2s infinite;
+            z-index: 10;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .scroll-indicator:hover {
+            transform: translateX(-50%) translateY(-5px);
         }
 
         .scroll-indicator i {
             font-size: 2rem;
             color: var(--white);
             opacity: 0.7;
+            animation: bounce 2s infinite;
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
 
         /* ========== SECTION STYLES ========== */
         .section {
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
             position: relative;
         }
 
@@ -279,13 +465,13 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
         }
 
         .section-number {
@@ -441,24 +627,22 @@
             text-transform: uppercase;
         }
 
-        /* ========== VISUALIZATION SECTIONS ========== */
-        .viz-section {
+        /* ========== FULL-WIDTH VISUALIZATION SECTIONS ========== */
+        .viz-section-fullwidth {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .viz-description {
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .viz-section.reverse {
-            grid-template-columns: 1.5fr 1fr;
-        }
-
-        .viz-section.reverse .viz-text {
-            order: 2;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
         }
 
         .viz-text h3 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--primary);
             margin-bottom: 1rem;
         }
@@ -470,7 +654,7 @@
         .viz-text p {
             font-size: 1.05rem;
             color: var(--text-medium);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .section-dark .viz-text p {
@@ -482,7 +666,7 @@
             border-left: 4px solid var(--success);
             padding: 1.25rem 1.5rem;
             border-radius: 0 8px 8px 0;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
         }
 
         .section-dark .insight-card {
@@ -509,33 +693,27 @@
             font-size: 1rem;
         }
 
-        .viz-container {
+        .viz-container-large {
             background: var(--white);
             border-radius: 16px;
             box-shadow: var(--shadow-xl);
             overflow: hidden;
-            position: relative;
+            width: 100%;
         }
 
-        .section-dark .viz-container {
+        .section-dark .viz-container-large {
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .viz-container iframe {
+        .viz-container-large iframe {
             width: 100%;
-            height: 500px;
+            height: 700px;
             border: none;
-        }
-
-        .viz-container img {
-            width: 100%;
-            height: auto;
-            display: block;
         }
 
         /* ========== DASHBOARD SECTION ========== */
         .dashboard-section {
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
             background: linear-gradient(180deg, var(--bg-light) 0%, var(--white) 100%);
         }
 
@@ -549,7 +727,7 @@
             border-radius: 20px;
             box-shadow: var(--shadow-xl);
             overflow: hidden;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
         .dashboard-header {
@@ -593,47 +771,65 @@
             border: none;
         }
 
-        /* ========== TASK TABS ========== */
-        .task-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+        /* ========== TOP IMPROVERS SECTION ========== */
+        .improvers-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
-        .task-tab {
-            padding: 1rem 2rem;
-            background: var(--white);
-            border: 2px solid var(--primary);
-            border-radius: 50px;
-            font-weight: 600;
-            color: var(--primary);
-            cursor: pointer;
+        .improver-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s;
         }
 
-        .task-tab:hover, .task-tab.active {
-            background: var(--primary);
+        .improver-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .improver-rank {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-success);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .improver-country {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
             color: var(--white);
         }
 
-        .task-tab i {
-            margin-right: 0.5rem;
+        .improver-gain {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #68d391;
         }
 
-        .task-content {
-            display: none;
+        .improver-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
         }
 
-        .task-content.active {
-            display: block;
-        }
-
-        /* ========== FINDINGS SECTION ========== */
+        /* ========== FINDINGS SECTION - 6 CARDS ========== */
         .findings-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin-top: 3rem;
         }
@@ -667,6 +863,8 @@
         .finding-icon.green { background: rgba(56, 161, 105, 0.1); color: var(--success); }
         .finding-icon.red { background: rgba(229, 62, 62, 0.1); color: var(--accent); }
         .finding-icon.yellow { background: rgba(214, 158, 46, 0.1); color: var(--warning); }
+        .finding-icon.purple { background: rgba(128, 90, 213, 0.1); color: #805ad5; }
+        .finding-icon.teal { background: rgba(56, 178, 172, 0.1); color: #319795; }
 
         .finding-card h4 {
             font-size: 1.25rem;
@@ -677,59 +875,6 @@
         .finding-card p {
             color: var(--text-medium);
             font-size: 0.95rem;
-        }
-
-        /* ========== TOP IMPROVERS SECTION ========== */
-        .improvers-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .improver-card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s;
-        }
-
-        .improver-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .improver-rank {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-success);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin: 0 auto 1rem;
-        }
-
-        .improver-country {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .improver-gain {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--success);
-        }
-
-        .improver-label {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            text-transform: uppercase;
         }
 
         /* ========== CTA SECTION ========== */
@@ -945,16 +1090,17 @@
         }
 
         /* ========== RESPONSIVE ========== */
+        @media (max-width: 1200px) {
+            .findings-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 968px) {
             .intro-content,
-            .viz-section,
-            .viz-section.reverse {
+            .viz-description {
                 grid-template-columns: 1fr;
                 gap: 2rem;
-            }
-
-            .viz-section.reverse .viz-text {
-                order: 0;
             }
 
             .footer-content {
@@ -977,11 +1123,20 @@
             .improvers-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .dna-helix, .pulse-rings {
+                display: none;
+            }
         }
 
         @media (max-width: 600px) {
             .hero-stats {
-                gap: 1.5rem;
+                gap: 1rem;
+            }
+
+            .stat-item {
+                min-width: 100px;
+                padding: 1rem;
             }
 
             .stat-number {
@@ -989,19 +1144,19 @@
             }
 
             .section {
-                padding: 4rem 1.5rem;
+                padding: 3rem 1.5rem;
             }
 
             .improvers-grid {
                 grid-template-columns: 1fr;
             }
 
-            .task-tabs {
-                flex-direction: column;
+            .findings-grid {
+                grid-template-columns: 1fr;
             }
 
-            .task-tab {
-                width: 100%;
+            .viz-container-large iframe {
+                height: 500px;
             }
         }
     </style>
@@ -1017,13 +1172,54 @@
                 <li><a href="#socioeconomic">Socioeconomics</a></li>
                 <li><a href="#health">Health Indicators</a></li>
                 <li><a href="#improvement">Improvement</a></li>
-                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#dashboard">Mini Dashboard</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Animated Background -->
     <section class="hero">
+        <!-- Background Image -->
+        <div class="hero-background">
+            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=2070&q=80" alt="Medical Background">
+        </div>
+        
+        <!-- Gradient Overlay -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Floating Particles -->
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+
+        <!-- DNA Helix Animation -->
+        <div class="dna-helix">
+            <div class="dna-strand">
+                <div class="dna-dot" style="top: 10%;"></div>
+                <div class="dna-dot" style="top: 25%; animation-delay: 0.5s;"></div>
+                <div class="dna-dot" style="top: 40%; animation-delay: 1s;"></div>
+                <div class="dna-dot" style="top: 55%; animation-delay: 1.5s;"></div>
+                <div class="dna-dot" style="top: 70%; animation-delay: 2s;"></div>
+                <div class="dna-dot" style="top: 85%; animation-delay: 2.5s;"></div>
+            </div>
+        </div>
+
+        <!-- Pulse Rings -->
+        <div class="pulse-rings">
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+        </div>
+
         <div class="hero-content">
             <span class="hero-badge">WHO Life Expectancy Analysis 2000-2015</span>
             <h1>The <span>40-Year</span> Gap</h1>
@@ -1047,9 +1243,9 @@
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
+        <a href="#intro" class="scroll-indicator">
             <i class="fas fa-chevron-down"></i>
-        </div>
+        </a>
     </section>
 
     <!-- Introduction Section -->
@@ -1109,26 +1305,34 @@
                     while Europe exceeds 79 years — a gap of nearly two decades.
                 </p>
             </div>
-            <div class="viz-section">
-                <div class="viz-text slide-in-left">
-                    <h3>The Geography of Longevity</h3>
-                    <p>
-                        Our choropleth map reveals stark geographic patterns. The darkest regions 
-                        — concentrated in Sub-Saharan Africa — represent countries where average 
-                        life expectancy remains below 55 years.
-                    </p>
-                    <p>
-                        In contrast, Japan, Switzerland, and Iceland lead the world with life 
-                        expectancies exceeding 82 years. The box plot shows Africa has both 
-                        the lowest median AND highest variance in outcomes.
-                    </p>
-                    <div class="insight-card">
-                        <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
-                        <p>Developed nations average 78.51 years vs 66.34 years for developing nations — 
-                        a 12-year gap determined largely by birth location.</p>
+            <div class="viz-section-fullwidth">
+                <div class="viz-description fade-in">
+                    <div class="viz-text">
+                        <h3>The Geography of Longevity</h3>
+                        <p>
+                            Our choropleth map reveals stark geographic patterns. The darkest regions 
+                            — concentrated in Sub-Saharan Africa — represent countries where average 
+                            life expectancy remains below 55 years.
+                        </p>
+                        <p>
+                            In contrast, Japan, Switzerland, and Iceland lead the world with life 
+                            expectancies exceeding 82 years.
+                        </p>
+                    </div>
+                    <div class="viz-text">
+                        <div class="insight-card">
+                            <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
+                            <p>Developed nations average 78.51 years vs 66.34 years for developing nations — 
+                            a 12-year gap determined largely by birth location.</p>
+                        </div>
+                        <div class="insight-card" style="margin-top: 1rem; border-left-color: var(--accent);">
+                            <h4 style="color: var(--accent);"><i class="fas fa-chart-bar"></i> Regional Variance</h4>
+                            <p>The box plot shows Africa has both the lowest median AND highest variance in outcomes, 
+                            indicating significant inequality even within the continent.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="viz-container slide-in-right">
+                <div class="viz-container-large slide-in-right">
                     <iframe src="https://public.tableau.com/views/505project_t1/Task1?:embed=y&:display_count=no&:showVizHome=no" 
                             allowfullscreen></iframe>
                 </div>
@@ -1147,26 +1351,34 @@
                     but the relationship is more nuanced than simple wealth accumulation.
                 </p>
             </div>
-            <div class="viz-section reverse">
-                <div class="viz-text slide-in-right">
-                    <h3>The Preston Curve</h3>
-                    <p>
-                        Our scatter plot reveals the famous Preston Curve relationship. Yes, wealth 
-                        correlates with longevity — but with diminishing returns. The curve flattens 
-                        dramatically after $20,000 GDP per capita.
-                    </p>
-                    <p>
-                        Education shows an even stronger effect: Developed nations average 12.1 years 
-                        of schooling versus 7.4 years for developing nations. Each additional year 
-                        of education correlates with approximately 2 years of added life expectancy.
-                    </p>
-                    <div class="insight-card">
-                        <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
-                        <p>Education is the most modifiable factor. Unlike GDP, schooling years can be 
-                        directly targeted through policy intervention.</p>
+            <div class="viz-section-fullwidth">
+                <div class="viz-description fade-in">
+                    <div class="viz-text">
+                        <h3>The Preston Curve</h3>
+                        <p>
+                            Our scatter plot reveals the famous Preston Curve relationship. Yes, wealth 
+                            correlates with longevity — but with diminishing returns. The curve flattens 
+                            dramatically after $20,000 GDP per capita.
+                        </p>
+                        <p>
+                            Education shows an even stronger effect: Developed nations average 12.1 years 
+                            of schooling versus 7.4 years for developing nations.
+                        </p>
+                    </div>
+                    <div class="viz-text">
+                        <div class="insight-card">
+                            <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
+                            <p>Education is the most modifiable factor. Unlike GDP, schooling years can be 
+                            directly targeted through policy intervention.</p>
+                        </div>
+                        <div class="insight-card" style="margin-top: 1rem;">
+                            <h4><i class="fas fa-graduation-cap"></i> Education Impact</h4>
+                            <p>Each additional year of education correlates with approximately 2 years 
+                            of added life expectancy.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="viz-container slide-in-left">
+                <div class="viz-container-large slide-in-left">
                     <iframe src="https://public.tableau.com/views/505project_t2/T2-Socioeconomics?:embed=y&:display_count=no&:showVizHome=no" 
                             allowfullscreen></iframe>
                 </div>
@@ -1185,26 +1397,34 @@
                     how long populations survive. These are the proximal causes of longevity differences.
                 </p>
             </div>
-            <div class="viz-section">
-                <div class="viz-text slide-in-left">
-                    <h3>Mortality & Vaccination Impact</h3>
-                    <p>
-                        Adult mortality (deaths per 1000 aged 15-60) shows a strong inverse relationship 
-                        with life expectancy. The global average adult mortality is 163.7 per 1000, 
-                        while infant mortality averages 23.56 per 1000.
-                    </p>
-                    <p>
-                        Vaccination coverage tells a success story: Polio (88.3%), Diphtheria (87.9%), 
-                        Hepatitis B (87.1%), and Measles (80.2%) coverage have all improved significantly, 
-                        contributing to reduced child mortality globally.
-                    </p>
-                    <div class="insight-card">
-                        <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
-                        <p>Reducing adult mortality by 100 points (per 1,000) correlates with 
-                        approximately 5 additional years of life expectancy.</p>
+            <div class="viz-section-fullwidth">
+                <div class="viz-description fade-in">
+                    <div class="viz-text">
+                        <h3>Mortality & Vaccination Impact</h3>
+                        <p>
+                            Adult mortality (deaths per 1000 aged 15-60) shows a strong inverse relationship 
+                            with life expectancy. The global average adult mortality is 163.7 per 1000, 
+                            while infant mortality averages 23.56 per 1000.
+                        </p>
+                        <p>
+                            Vaccination coverage tells a success story: Polio (88.3%), Diphtheria (87.9%), 
+                            Hepatitis B (87.1%), and Measles (80.2%) coverage have all improved significantly.
+                        </p>
+                    </div>
+                    <div class="viz-text">
+                        <div class="insight-card">
+                            <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
+                            <p>Reducing adult mortality by 100 points (per 1,000) correlates with 
+                            approximately 5 additional years of life expectancy.</p>
+                        </div>
+                        <div class="insight-card" style="margin-top: 1rem;">
+                            <h4><i class="fas fa-syringe"></i> Vaccination Success</h4>
+                            <p>Global vaccination rates improved across all four major vaccines from 2000-2015, 
+                            contributing to reduced child mortality worldwide.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="viz-container slide-in-right">
+                <div class="viz-container-large slide-in-right">
                     <iframe src="https://public.tableau.com/views/505project_t3/T3-Mortality?:embed=y&:display_count=no&:showVizHome=no" 
                             allowfullscreen></iframe>
                 </div>
@@ -1258,26 +1478,34 @@
                 </div>
             </div>
 
-            <div class="viz-section" style="margin-top: 3rem;">
-                <div class="viz-text slide-in-left">
-                    <h3>All Top 15 Improvers Are African</h3>
-                    <p>
-                        A remarkable finding: every single country in the top 15 life expectancy 
-                        improvers is from Africa. This "catch-up" phenomenon shows that targeted 
-                        interventions can dramatically improve health outcomes.
-                    </p>
-                    <p>
-                        The key factors driving improvement were: GDP growth (+350 USD average), 
-                        adult mortality reduction (-200 per 1000), and expanded vaccination 
-                        coverage (+30 percentage points for Polio).
-                    </p>
-                    <div class="insight-card">
-                        <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
-                        <p>Rwanda gained nearly 19 years of life expectancy in just 15 years — 
-                        proving that rapid improvement is possible with focused investment.</p>
+            <div class="viz-section-fullwidth">
+                <div class="viz-description fade-in">
+                    <div class="viz-text">
+                        <h3>All Top 15 Improvers Are African</h3>
+                        <p>
+                            A remarkable finding: every single country in the top 15 life expectancy 
+                            improvers is from Africa. This "catch-up" phenomenon shows that targeted 
+                            interventions can dramatically improve health outcomes.
+                        </p>
+                        <p>
+                            The key factors driving improvement were: GDP growth (+350 USD average), 
+                            adult mortality reduction (-200 per 1000), and expanded vaccination coverage.
+                        </p>
+                    </div>
+                    <div class="viz-text">
+                        <div class="insight-card">
+                            <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
+                            <p>Rwanda gained nearly 19 years of life expectancy in just 15 years — 
+                            proving that rapid improvement is possible with focused investment.</p>
+                        </div>
+                        <div class="insight-card" style="margin-top: 1rem;">
+                            <h4><i class="fas fa-chart-line"></i> Contributing Factors</h4>
+                            <p>Top 3 factors: GDP growth (+350 USD), Adult Mortality reduction (-200), 
+                            and Polio vaccination increase (+30 percentage points).</p>
+                        </div>
                     </div>
                 </div>
-                <div class="viz-container slide-in-right">
+                <div class="viz-container-large slide-in-right">
                     <iframe src="https://public.tableau.com/views/505project_t4/Task4?:embed=y&:display_count=no&:showVizHome=no" 
                             allowfullscreen></iframe>
                 </div>
@@ -1313,7 +1541,7 @@
         </div>
     </section>
 
-    <!-- Key Findings Section -->
+    <!-- Key Findings Section - 6 Cards -->
     <section class="section" id="findings">
         <div class="container">
             <div class="section-header fade-in">
@@ -1358,6 +1586,22 @@
                     <p>All top 15 improvers are African nations. Rwanda's 18.9-year gain proves that 
                     rapid improvement is possible with focused investment in health infrastructure.</p>
                 </div>
+                <div class="finding-card fade-in">
+                    <div class="finding-icon purple">
+                        <i class="fas fa-syringe"></i>
+                    </div>
+                    <h4>Vaccination Saves Lives</h4>
+                    <p>Global vaccination rates for Polio (88.3%), Diphtheria (87.9%), Hepatitis B (87.1%), 
+                    and Measles (80.2%) have significantly reduced child mortality worldwide.</p>
+                </div>
+                <div class="finding-card fade-in">
+                    <div class="finding-icon teal">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h4>The 12-Year Gap Persists</h4>
+                    <p>Despite progress, developed nations (78.51 years) still outlive developing nations 
+                    (66.34 years) by over a decade. Closing this gap requires sustained global investment.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1372,7 +1616,7 @@
                 The question isn't whether we <em>can</em> close the 40-year gap — it's whether we <em>will</em>.
             </p>
             <div class="cta-buttons">
-                <a href="https://public.tableau.com/app/profile/runze.gao/viz/505project_Miniboard/Miniboard" 
+                <a href="https://public.tableau.com/app/profile/runze.gao/viz/505project_2/Task1" 
                    target="_blank" class="btn btn-primary">
                     <i class="fas fa-chart-bar"></i> Explore Full Dashboard
                 </a>
@@ -1408,7 +1652,7 @@
                 <h4>Resources</h4>
                 <ul>
                     <li><a href="https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated" target="_blank">Dataset (Kaggle)</a></li>
-                    <li><a href="https://public.tableau.com/app/profile/runze.gao" target="_blank">Tableau Public</a></li>
+                    <li><a href="https://public.tableau.com/app/profile/runze.gao/viz/505project_2/Task1" target="_blank">Tableau Public</a></li>
                     <li><a href="https://www.who.int/" target="_blank">World Health Organization</a></li>
                 </ul>
             </div>
@@ -1416,9 +1660,7 @@
         <div class="footer-bottom">
             <p>&copy; 2025 CDS505 Group 17 | Universiti Sains Malaysia</p>
             <div class="footer-social">
-                <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/taneesheng/CDS505-Project" target="_blank"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </footer>
@@ -1435,7 +1677,7 @@
             }
         });
 
-        // Smooth scroll for anchor links
+        // Smooth scroll for anchor links (including scroll indicator)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
