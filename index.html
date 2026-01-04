@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The 40-Year Gap | WHO Life Expectancy Analysis</title>
+    <title>The 37-Year Gap | WHO Life Expectancy Analysis</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -21,7 +21,7 @@
             --bg-light: #f7fafc;
             --bg-cream: #fffaf0;
             --white: #ffffff;
-            --gradient-hero: linear-gradient(135deg, rgba(26, 54, 93, 0.9) 0%, rgba(44, 82, 130, 0.85) 50%, rgba(49, 130, 206, 0.8) 100%);
+            --gradient-hero: linear-gradient(135deg, rgba(26, 54, 93, 0.92) 0%, rgba(44, 82, 130, 0.88) 50%, rgba(49, 130, 206, 0.85) 100%);
             --gradient-accent: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
             --gradient-success: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
@@ -104,14 +104,14 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             list-style: none;
         }
 
         .nav-links a {
             color: rgba(255, 255, 255, 0.9);
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: all 0.3s;
             position: relative;
         }
@@ -128,21 +128,6 @@
             color: var(--accent);
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
         /* ========== HERO SECTION ========== */
         .hero {
             min-height: 100vh;
@@ -154,7 +139,6 @@
             background: #1a365d;
         }
 
-        /* Video/Image Background */
         .hero-background {
             position: absolute;
             top: 0;
@@ -171,7 +155,6 @@
             opacity: 0.4;
         }
 
-        /* Animated gradient overlay */
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -182,7 +165,6 @@
             z-index: 1;
         }
 
-        /* Floating particles animation */
         .particles {
             position: absolute;
             top: 0;
@@ -210,87 +192,12 @@
         .particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 21s; }
         .particle:nth-child(7) { left: 70%; animation-delay: 2.5s; animation-duration: 17s; }
         .particle:nth-child(8) { left: 80%; animation-delay: 1.5s; animation-duration: 23s; }
-        .particle:nth-child(9) { left: 90%; animation-delay: 4.5s; animation-duration: 20s; }
-        .particle:nth-child(10) { left: 15%; animation-delay: 3.5s; animation-duration: 24s; }
 
         @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        /* DNA Helix Animation */
-        .dna-helix {
-            position: absolute;
-            right: 5%;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100px;
-            height: 400px;
-            z-index: 2;
-            opacity: 0.3;
-        }
-
-        .dna-strand {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .dna-dot {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: dnaRotate 4s ease-in-out infinite;
-        }
-
-        @keyframes dnaRotate {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(80px); }
-        }
-
-        /* Pulse rings */
-        .pulse-rings {
-            position: absolute;
-            left: 10%;
-            top: 30%;
-            z-index: 2;
-        }
-
-        .pulse-ring {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: pulseRing 3s ease-out infinite;
-        }
-
-        .pulse-ring:nth-child(2) { animation-delay: 1s; }
-        .pulse-ring:nth-child(3) { animation-delay: 2s; }
-
-        @keyframes pulseRing {
-            0% {
-                transform: scale(0.5);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(2);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
 
         .hero-content {
@@ -327,18 +234,6 @@
 
         .hero h1 span {
             color: var(--accent-light);
-            position: relative;
-        }
-
-        .hero h1 span::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: rgba(229, 62, 62, 0.3);
-            z-index: -1;
         }
 
         .hero-subtitle {
@@ -354,7 +249,7 @@
         .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 3rem;
+            gap: 2rem;
             flex-wrap: wrap;
             margin-bottom: 3rem;
             animation: fadeInUp 1s ease-out 0.7s both;
@@ -397,25 +292,13 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .scroll-indicator {
@@ -425,11 +308,6 @@
             transform: translateX(-50%);
             z-index: 10;
             cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .scroll-indicator:hover {
-            transform: translateX(-50%) translateY(-5px);
         }
 
         .scroll-indicator i {
@@ -548,10 +426,6 @@
             margin: 0;
         }
 
-        .intro-visual {
-            position: relative;
-        }
-
         .comparison-cards {
             display: flex;
             gap: 1.5rem;
@@ -627,7 +501,7 @@
             text-transform: uppercase;
         }
 
-        /* ========== FULL-WIDTH VISUALIZATION SECTIONS ========== */
+        /* ========== VISUALIZATION SECTIONS ========== */
         .viz-section-fullwidth {
             display: flex;
             flex-direction: column;
@@ -707,8 +581,46 @@
 
         .viz-container-large iframe {
             width: 100%;
-            height: 700px;
+            height: 900px;
             border: none;
+        }
+
+        /* ========== TASK 3 TABS ========== */
+        .health-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .health-tab {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .health-tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .health-tab.active {
+            background: var(--white);
+            color: var(--primary);
+            border-color: var(--white);
+        }
+
+        .health-panel {
+            display: none;
+        }
+
+        .health-panel.active {
+            display: block;
         }
 
         /* ========== DASHBOARD SECTION ========== */
@@ -745,11 +657,6 @@
             font-weight: 600;
         }
 
-        .dashboard-controls {
-            display: flex;
-            gap: 1rem;
-        }
-
         .control-btn {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -767,11 +674,11 @@
 
         .dashboard-embed {
             width: 100%;
-            height: 800px;
+            height: 850px;
             border: none;
         }
 
-        /* ========== TOP IMPROVERS SECTION ========== */
+        /* ========== TOP IMPROVERS ========== */
         .improvers-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -826,7 +733,7 @@
             text-transform: uppercase;
         }
 
-        /* ========== FINDINGS SECTION - 6 CARDS ========== */
+        /* ========== FINDINGS SECTION ========== */
         .findings-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -885,22 +792,6 @@
             color: var(--white);
             position: relative;
             overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 15s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
         }
 
         .cta-content {
@@ -1067,28 +958,6 @@
             transform: translateY(0);
         }
 
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s ease-out;
-        }
-
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s ease-out;
-        }
-
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
         /* ========== RESPONSIVE ========== */
         @media (max-width: 1200px) {
             .findings-grid {
@@ -1124,8 +993,9 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .dna-helix, .pulse-rings {
-                display: none;
+            .health-tabs {
+                flex-direction: column;
+                align-items: center;
             }
         }
 
@@ -1156,7 +1026,11 @@
             }
 
             .viz-container-large iframe {
-                height: 500px;
+                height: 600px;
+            }
+
+            .dashboard-embed {
+                height: 600px;
             }
         }
     </style>
@@ -1165,29 +1039,24 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="nav-logo">The 40-Year Gap</a>
+            <a href="#" class="nav-logo">The 37-Year Gap</a>
             <ul class="nav-links">
                 <li><a href="#intro">The Problem</a></li>
-                <li><a href="#global">Global Divide</a></li>
+                <li><a href="#global">Global Inequality</a></li>
                 <li><a href="#socioeconomic">Socioeconomics</a></li>
                 <li><a href="#health">Health Indicators</a></li>
-                <li><a href="#improvement">Improvement</a></li>
+                <li><a href="#improvement">Improvement Factors</a></li>
                 <li><a href="#dashboard">Mini Dashboard</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section with Animated Background -->
+    <!-- Hero Section -->
     <section class="hero">
-        <!-- Background Image -->
         <div class="hero-background">
             <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=2070&q=80" alt="Medical Background">
         </div>
-        
-        <!-- Gradient Overlay -->
         <div class="hero-overlay"></div>
-        
-        <!-- Floating Particles -->
         <div class="particles">
             <div class="particle"></div>
             <div class="particle"></div>
@@ -1197,32 +1066,11 @@
             <div class="particle"></div>
             <div class="particle"></div>
             <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
-
-        <!-- DNA Helix Animation -->
-        <div class="dna-helix">
-            <div class="dna-strand">
-                <div class="dna-dot" style="top: 10%;"></div>
-                <div class="dna-dot" style="top: 25%; animation-delay: 0.5s;"></div>
-                <div class="dna-dot" style="top: 40%; animation-delay: 1s;"></div>
-                <div class="dna-dot" style="top: 55%; animation-delay: 1.5s;"></div>
-                <div class="dna-dot" style="top: 70%; animation-delay: 2s;"></div>
-                <div class="dna-dot" style="top: 85%; animation-delay: 2.5s;"></div>
-            </div>
-        </div>
-
-        <!-- Pulse Rings -->
-        <div class="pulse-rings">
-            <div class="pulse-ring"></div>
-            <div class="pulse-ring"></div>
-            <div class="pulse-ring"></div>
         </div>
 
         <div class="hero-content">
             <span class="hero-badge">WHO Life Expectancy Analysis 2000-2015</span>
-            <h1>The <span>40-Year</span> Gap</h1>
+            <h1>The <span>37-Year</span> Gap</h1>
             <p class="hero-subtitle">
                 What determines how long we live? Our analysis of 179 countries reveals 
                 the stark reality: where you're born can mean the difference between 
@@ -1270,7 +1118,7 @@
                         And more importantly — what can be done about it?</p>
                     </div>
                 </div>
-                <div class="intro-visual slide-in-right">
+                <div class="intro-visual fade-in">
                     <div class="comparison-cards">
                         <div class="country-card low">
                             <div class="country-flag">🇱🇸</div>
@@ -1315,25 +1163,25 @@
                             life expectancy remains below 55 years.
                         </p>
                         <p>
-                            In contrast, Japan, Switzerland, and Iceland lead the world with life 
-                            expectancies exceeding 82 years.
+                            In contrast, Japan (83.8 years), Switzerland (82.9 years), and Iceland (82.5 years) 
+                            lead the world with life expectancies exceeding 82 years.
                         </p>
                     </div>
                     <div class="viz-text">
                         <div class="insight-card">
                             <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
                             <p>Developed nations average 78.51 years vs 66.34 years for developing nations — 
-                            a 12-year gap determined largely by birth location.</p>
+                            a 12.17-year gap determined largely by birth location.</p>
                         </div>
                         <div class="insight-card" style="margin-top: 1rem; border-left-color: var(--accent);">
                             <h4 style="color: var(--accent);"><i class="fas fa-chart-bar"></i> Regional Variance</h4>
-                            <p>The box plot shows Africa has both the lowest median AND highest variance in outcomes, 
-                            indicating significant inequality even within the continent.</p>
+                            <p>The box plot shows Africa has both the lowest median (62.47 years) AND highest variance 
+                            in outcomes, indicating significant inequality even within the continent.</p>
                         </div>
                     </div>
                 </div>
-                <div class="viz-container-large slide-in-right">
-                    <iframe src="https://public.tableau.com/views/505project_t1/Task1?:embed=y&:display_count=no&:showVizHome=no" 
+                <div class="viz-container-large fade-in">
+                    <iframe src="https://public.tableau.com/views/505project_1/Task1?:embed=y&:display_count=no&:showVizHome=no" 
                             allowfullscreen></iframe>
                 </div>
             </div>
@@ -1362,7 +1210,7 @@
                         </p>
                         <p>
                             Education shows an even stronger effect: Developed nations average 12.1 years 
-                            of schooling versus 7.4 years for developing nations.
+                            of schooling versus 7.4 years for developing nations — a 4.7-year education gap.
                         </p>
                     </div>
                     <div class="viz-text">
@@ -1378,15 +1226,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="viz-container-large slide-in-left">
-                    <iframe src="https://public.tableau.com/views/505project_t2/T2-Socioeconomics?:embed=y&:display_count=no&:showVizHome=no" 
+                <div class="viz-container-large fade-in">
+                    <iframe src="https://public.tableau.com/views/505project_2/T2-Socioeconomics?:embed=y&:display_count=no&:showVizHome=no" 
                             allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Task 3: Health Indicators -->
+    <!-- Task 3: Health Indicators (with Tabs) -->
     <section class="section section-cream" id="health">
         <div class="container">
             <div class="section-header fade-in">
@@ -1397,36 +1245,110 @@
                     how long populations survive. These are the proximal causes of longevity differences.
                 </p>
             </div>
-            <div class="viz-section-fullwidth">
-                <div class="viz-description fade-in">
-                    <div class="viz-text">
-                        <h3>Mortality & Vaccination Impact</h3>
-                        <p>
-                            Adult mortality (deaths per 1000 aged 15-60) shows a strong inverse relationship 
-                            with life expectancy. The global average adult mortality is 163.7 per 1000, 
-                            while infant mortality averages 23.56 per 1000.
-                        </p>
-                        <p>
-                            Vaccination coverage tells a success story: Polio (88.3%), Diphtheria (87.9%), 
-                            Hepatitis B (87.1%), and Measles (80.2%) coverage have all improved significantly.
-                        </p>
+
+            <!-- Health Indicator Tabs -->
+            <div class="health-tabs fade-in">
+                <button class="health-tab active" onclick="showHealthPanel('mortality')">
+                    <i class="fas fa-heartbeat"></i> Mortality
+                </button>
+                <button class="health-tab" onclick="showHealthPanel('vaccination')">
+                    <i class="fas fa-syringe"></i> Vaccination
+                </button>
+                <button class="health-tab" onclick="showHealthPanel('bmi')">
+                    <i class="fas fa-weight"></i> BMI & Nutrition
+                </button>
+            </div>
+
+            <!-- Mortality Panel -->
+            <div id="mortality-panel" class="health-panel active">
+                <div class="viz-section-fullwidth">
+                    <div class="viz-description fade-in">
+                        <div class="viz-text">
+                            <h3>Mortality & Survival</h3>
+                            <p>
+                                Adult mortality (deaths per 1000 aged 15-60) shows a strong inverse relationship 
+                                with life expectancy. The global average adult mortality is 163.7 per 1000, 
+                                while infant mortality averages 23.56 per 1000.
+                            </p>
+                            <p>
+                                Countries with high adult mortality also tend to have high infant mortality,
+                                suggesting systemic healthcare deficits affect all age groups.
+                            </p>
+                        </div>
+                        <div class="viz-text">
+                            <div class="insight-card">
+                                <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
+                                <p>Reducing adult mortality by 100 points (per 1,000) correlates with 
+                                approximately 5 additional years of life expectancy.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="viz-text">
-                        <div class="insight-card">
-                            <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
-                            <p>Reducing adult mortality by 100 points (per 1,000) correlates with 
-                            approximately 5 additional years of life expectancy.</p>
-                        </div>
-                        <div class="insight-card" style="margin-top: 1rem;">
-                            <h4><i class="fas fa-syringe"></i> Vaccination Success</h4>
-                            <p>Global vaccination rates improved across all four major vaccines from 2000-2015, 
-                            contributing to reduced child mortality worldwide.</p>
-                        </div>
+                    <div class="viz-container-large fade-in">
+                        <iframe src="https://public.tableau.com/views/505project_3_1/T3-Mortality?:embed=y&:display_count=no&:showVizHome=no" 
+                                allowfullscreen></iframe>
                     </div>
                 </div>
-                <div class="viz-container-large slide-in-right">
-                    <iframe src="https://public.tableau.com/views/505project_t3/T3-Mortality?:embed=y&:display_count=no&:showVizHome=no" 
-                            allowfullscreen></iframe>
+            </div>
+
+            <!-- Vaccination Panel -->
+            <div id="vaccination-panel" class="health-panel">
+                <div class="viz-section-fullwidth">
+                    <div class="viz-description fade-in">
+                        <div class="viz-text">
+                            <h3>Vaccination Coverage</h3>
+                            <p>
+                                Vaccination coverage tells a success story: Polio (88.3%), Diphtheria (87.9%), 
+                                Hepatitis B (87.1%), and Measles (80.2%) coverage have all improved significantly 
+                                from 2000-2015.
+                            </p>
+                            <p>
+                                Higher vaccination rates correlate strongly with lower infant mortality
+                                and higher overall life expectancy.
+                            </p>
+                        </div>
+                        <div class="viz-text">
+                            <div class="insight-card">
+                                <h4><i class="fas fa-syringe"></i> Vaccination Success</h4>
+                                <p>Global vaccination rates improved across all four major vaccines from 2000-2015, 
+                                contributing to reduced child mortality worldwide.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="viz-container-large fade-in">
+                        <iframe src="https://public.tableau.com/views/505project_3_2/T3-Vaccination?:embed=y&:display_count=no&:showVizHome=no" 
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BMI Panel -->
+            <div id="bmi-panel" class="health-panel">
+                <div class="viz-section-fullwidth">
+                    <div class="viz-description fade-in">
+                        <div class="viz-text">
+                            <h3>BMI & Nutritional Status</h3>
+                            <p>
+                                Body Mass Index (BMI) and thinness rates reveal nutritional determinants of health.
+                                Countries with higher average BMI (indicating adequate nutrition) generally have
+                                higher life expectancy, though extremes in either direction pose risks.
+                            </p>
+                            <p>
+                                Thinness rates among children (5-9 years) and adolescents (10-19 years) are 
+                                concentrated in South Asia and Sub-Saharan Africa.
+                            </p>
+                        </div>
+                        <div class="viz-text">
+                            <div class="insight-card">
+                                <h4><i class="fas fa-apple-alt"></i> Nutrition Impact</h4>
+                                <p>Countries with adequate nutrition (moderate BMI) show better health outcomes 
+                                than those with high thinness rates indicating malnutrition.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="viz-container-large fade-in">
+                        <iframe src="https://public.tableau.com/views/505project_3_3/T3-BMI?:embed=y&:display_count=no&:showVizHome=no" 
+                                allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1489,7 +1411,8 @@
                         </p>
                         <p>
                             The key factors driving improvement were: GDP growth (+350 USD average), 
-                            adult mortality reduction (-200 per 1000), and expanded vaccination coverage.
+                            adult mortality reduction (-200 per 1000), and expanded vaccination coverage 
+                            (+30 percentage points for Polio).
                         </p>
                     </div>
                     <div class="viz-text">
@@ -1505,8 +1428,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="viz-container-large slide-in-right">
-                    <iframe src="https://public.tableau.com/views/505project_t4/Task4?:embed=y&:display_count=no&:showVizHome=no" 
+                <div class="viz-container-large fade-in">
+                    <iframe src="https://public.tableau.com/views/505project_4/Task4?:embed=y&:display_count=no&:showVizHome=no" 
                             allowfullscreen></iframe>
                 </div>
             </div>
@@ -1527,21 +1450,19 @@
             <div class="dashboard-wrapper fade-in">
                 <div class="dashboard-header">
                     <h3><i class="fas fa-chart-line"></i> Global Life Expectancy Mini-Dashboard</h3>
-                    <div class="dashboard-controls">
-                        <a href="https://public.tableau.com/app/profile/runze.gao/viz/505project_Miniboard/Miniboard" 
-                           target="_blank" class="control-btn">
-                            <i class="fas fa-external-link-alt"></i> Open Full Screen
-                        </a>
-                    </div>
+                    <a href="https://public.tableau.com/app/profile/runze.gao/viz/505project_mini/Miniboard" 
+                       target="_blank" class="control-btn">
+                        <i class="fas fa-external-link-alt"></i> Open Full Screen
+                    </a>
                 </div>
                 <iframe class="dashboard-embed" 
-                        src="https://public.tableau.com/views/505project_Miniboard/Miniboard?:embed=y&:display_count=no&:showVizHome=no">
+                        src="https://public.tableau.com/views/505project_mini/Miniboard?:embed=y&:display_count=no&:showVizHome=no">
                 </iframe>
             </div>
         </div>
     </section>
 
-    <!-- Key Findings Section - 6 Cards -->
+    <!-- Key Findings Section -->
     <section class="section" id="findings">
         <div class="container">
             <div class="section-header fade-in">
@@ -1613,12 +1534,12 @@
             <p>
                 The data reveals a clear path: investing in education, expanding healthcare access, 
                 and supporting economic development in the poorest nations can add decades to human life. 
-                The question isn't whether we <em>can</em> close the 40-year gap — it's whether we <em>will</em>.
+                The question isn't whether we <em>can</em> close the 37-year gap — it's whether we <em>will</em>.
             </p>
             <div class="cta-buttons">
-                <a href="https://public.tableau.com/app/profile/runze.gao/viz/505project_2/Task1" 
+                <a href="https://public.tableau.com/app/profile/runze.gao" 
                    target="_blank" class="btn btn-primary">
-                    <i class="fas fa-chart-bar"></i> Explore Full Dashboard
+                    <i class="fas fa-chart-bar"></i> View All Dashboards
                 </a>
                 <a href="https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated" 
                    target="_blank" class="btn btn-secondary">
@@ -1632,7 +1553,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <h3>The 40-Year Gap</h3>
+                <h3>The 37-Year Gap</h3>
                 <p>
                     A data visualization project exploring global life expectancy patterns 
                     and the factors that determine how long we live. Created for CDS505 
@@ -1645,14 +1566,14 @@
                     <li><a href="#global">Global Inequality</a></li>
                     <li><a href="#socioeconomic">Socioeconomics</a></li>
                     <li><a href="#health">Health Indicators</a></li>
-                    <li><a href="#improvement">Improvement</a></li>
+                    <li><a href="#improvement">Improvement Factors</a></li>
                 </ul>
             </div>
             <div class="footer-links">
                 <h4>Resources</h4>
                 <ul>
                     <li><a href="https://www.kaggle.com/datasets/lashagoch/life-expectancy-who-updated" target="_blank">Dataset (Kaggle)</a></li>
-                    <li><a href="https://public.tableau.com/app/profile/runze.gao/viz/505project_2/Task1" target="_blank">Tableau Public</a></li>
+                    <li><a href="https://public.tableau.com/app/profile/runze.gao" target="_blank">Tableau Public Profile</a></li>
                     <li><a href="https://www.who.int/" target="_blank">World Health Organization</a></li>
                 </ul>
             </div>
@@ -1677,7 +1598,7 @@
             }
         });
 
-        // Smooth scroll for anchor links (including scroll indicator)
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1690,6 +1611,25 @@
                 }
             });
         });
+
+        // Health Indicator Tab Switching
+        function showHealthPanel(panelName) {
+            // Hide all panels
+            document.querySelectorAll('.health-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // Deactivate all tabs
+            document.querySelectorAll('.health-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected panel
+            document.getElementById(panelName + '-panel').classList.add('active');
+            
+            // Activate selected tab
+            event.target.classList.add('active');
+        }
 
         // Scroll animation observer
         const observerOptions = {
@@ -1705,43 +1645,9 @@
             });
         }, observerOptions);
 
-        // Observe all animated elements
-        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+        document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
-
-        // Counter animation for stats
-        const animateCounter = (element, target, duration = 2000) => {
-            let start = 0;
-            const increment = target / (duration / 16);
-            const timer = setInterval(() => {
-                start += increment;
-                if (start >= target) {
-                    element.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(start);
-                }
-            }, 16);
-        };
-
-        // Animate stats when hero is visible
-        const heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    document.querySelectorAll('.stat-number').forEach(stat => {
-                        const value = parseFloat(stat.textContent);
-                        if (!isNaN(value)) {
-                            stat.textContent = '0';
-                            animateCounter(stat, value);
-                        }
-                    });
-                    heroObserver.disconnect();
-                }
-            });
-        }, { threshold: 0.5 });
-
-        heroObserver.observe(document.querySelector('.hero'));
     </script>
 </body>
 </html>
