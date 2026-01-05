@@ -581,7 +581,7 @@
 
         .viz-container-large iframe {
             width: 100%;
-            height: 900px;
+            height: 950px;
             border: none;
         }
 
@@ -596,23 +596,29 @@
 
         .health-tab {
             padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: var(--white);
+            border: 2px solid var(--primary-light);
             border-radius: 50px;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--primary);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
         }
 
         .health-tab:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--primary-light);
+            color: var(--white);
+            border-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .health-tab.active {
-            background: var(--white);
-            color: var(--primary);
-            border-color: var(--white);
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
         }
 
         .health-panel {
